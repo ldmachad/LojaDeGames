@@ -11,31 +11,26 @@ namespace Machado_Games.Validator
     {
         public ProdutoValidator()
         {
-            RuleFor(t => t.Nome)
+            RuleFor(p => p.Nome)
                     .NotEmpty()
                     .MinimumLength(2)
                     .MaximumLength(100);
 
-            RuleFor(t => t.Descricao)
+            RuleFor(p => p.Descricao)
                     .NotEmpty()
                     .MinimumLength(10)
                     .MaximumLength(1000);
 
-            RuleFor(t => t.Console)
-                   .NotEmpty()
-                   .MinimumLength(2)
-                   .MaximumLength(255);
-
-            RuleFor(t => t.DataLancamento)
+            RuleFor(p => p.Console)
                    .NotEmpty();
 
-            RuleFor(t => t.Preco)
+            RuleFor(p => p.DataLancamento)
                    .NotEmpty();
 
-            RuleFor(t => t.Foto)
-                   .NotEmpty()
-                   .MinimumLength(5)
-                   .MaximumLength(500);
+            RuleFor(p => p.Preco)
+                   .NotNull()
+                   .GreaterThan(0)
+                   .PrecisionScale(20, 2, false);
         }
     }
 }
