@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Machado_Games.Data;
 using Machado_Games.Model;
 using Microsoft.EntityFrameworkCore;
@@ -57,7 +53,7 @@ namespace Machado_Games.Service.Implements
 
         public async Task<Categoria?> Update(Categoria categoria)
         {
-            var CategoriaUpdate = await _context.Categorias.FindAsync(categoria.Id);
+            var CategoriaUpdate = await _context.Categorias.FindAsync(categoria.Id);                                                                  
 
             if (CategoriaUpdate is null)
             {
