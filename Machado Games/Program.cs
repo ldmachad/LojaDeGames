@@ -100,9 +100,9 @@ namespace Machado_Games
 
             app.UseCors("MyPolicy");
 
-            app.UseAuthorization();
-
             app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.MapControllers();
 
