@@ -37,7 +37,7 @@ Para configurar e executar o projeto em sua máquina, siga estas etapas:
 
 ## Endpoints da API
 
-# Usuário
+### Usuário
 
 GET /usuarios: Retorna a lista de usuários.
 
@@ -49,7 +49,7 @@ POST /usuarios/logar: Faz login do usuário.
 
 PUT /usuarios/atualizar: Atualiza um usuário existente.
 
-# Categoria
+### Categoria
 
 GET /categorias: Retorna a lista de categorias.
 
@@ -63,7 +63,7 @@ PUT /categorias/{id}: Atualiza uma categoria existente.
 
 DELETE /categorias/{id}: Exclui uma categoria.
 
-# Produto
+### Produto
 
 GET /produtos: Retorna a lista de produtos.
 
@@ -85,12 +85,12 @@ Para acessar as rotas protegidas, você precisará incluir um token JWT válido 
 
 Certifique-se de incluir o token no cabeçalho das requisições protegidas com o cabeçalho **Authorization** no formato **Bearer seu-token-jwt-aqui**.
 
-# Exemplo de Login:
+### Exemplo de Login:
 
-``` bash
 POST /usuarios/logar
 Content-Type: application/json
 
+``` bash
 {
   "username": "usuario@usuario.com.br",
   "password": "12345678"
