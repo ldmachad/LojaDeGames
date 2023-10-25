@@ -10,6 +10,9 @@ using Machado_Games.Validator;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
+using blogpessoal.Configuration;
 
 namespace Machado_Games
 {
@@ -68,7 +71,46 @@ namespace Machado_Games
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            
+            // Configuração do Swagger
+            builder.Services.AddSwaggerGen(options =>
+            {
+                // Adição das informações do projeto e da pessoa desenvolvedora
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Projeto Machado Games",
+                    Description = "Projeto Machado Games - ASP.NET Core 7.0",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Leonardo Machado",
+                        Email = "dev.leonardomachado@gmail.com",
+                        Url = new Uri("https://github.com/ldmachad")
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "GitHub",
+                        Url = new Uri("https://github.com/ldmachad")
+                    }
+                });
+
+                // Configuração de Segurança do Swagger
+                options.AddSecurityDefinition("JWT", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Digite um Token JWT válido",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "Bearer"
+                });
+
+                // Adicionar a indicação de endpoint protegido
+                options.OperationFilter<AuthResponsesOperationFilter>();
+            });
+
+            // Adição do Fluent Validation no Swagger
+            builder.Services.AddFluentValidationRulesToSwagger();
 
             // Configuração do CORS
             builder.Services.AddCors(options =>
